@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  backend:
+    image: docker.n-educatio.pl/node:10
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/project
+    working_dir: /project
+    tty: true
+    stdin_open: true
+    command: bash -c "yarn && yarn start"
