@@ -11,6 +11,14 @@ services:
     tty: true
     stdin_open: true
     command: bash -c "yarn && yarn start"
+  movies:
+    image: node:10
+    volumes:
+      - ./movies:/project
+    working_dir: /project
+    tty: true
+    stdin_open: true
+    command: bash -c "yarn && yarn start"
   queue:
     image: rabbitmq:3
     tty: true
