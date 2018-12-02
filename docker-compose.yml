@@ -19,9 +19,16 @@ services:
     tty: true
     stdin_open: true
     command: bash -c "yarn && yarn start:dev"
-    deploy:
-      replicas: 2
+#    deploy:
+#      replicas: 2
   queue:
     image: rabbitmq:3
     tty: true
     stdin_open: true
+  database:
+    image: postgres:11
+    volumes:
+      - data:/var/lib/postgresql/data
+
+volumes:
+  data: {}
