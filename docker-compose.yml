@@ -7,6 +7,7 @@ services:
       - "3000:3000"
     volumes:
       - ./backend:/project
+      - ./shared:/shared
     working_dir: /project
     tty: true
     stdin_open: true
@@ -15,6 +16,7 @@ services:
     image: node:10
     volumes:
       - ./movies:/project
+      - ./shared:/shared
     working_dir: /project
     tty: true
     stdin_open: true

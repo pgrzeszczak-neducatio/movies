@@ -1,6 +1,6 @@
 import {Controller} from '@nestjs/common';
 import {MessagePattern} from '@nestjs/microservices';
-import {MovieDto} from './entities/movie.dto';
+import {MovieDto} from '@shared/dto/movie.dto';
 import {MovieService} from './services/movie.service';
 import {Movie} from './entities/movie.entity';
 
