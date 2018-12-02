@@ -5,7 +5,9 @@ export class Movie {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ length: 500 })
+    @Column({
+        length: 500,
+    })
     title: string;
 
     @Column('text')
@@ -17,6 +19,9 @@ export class Movie {
     @Column('int')
     length: number;
 
-    @Column()
+    @Column({
+        length: 500,
+        default: 'https://via.placeholder.com/150x400?text=:(',
+    })
     poster: string;
 }
