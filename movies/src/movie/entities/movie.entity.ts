@@ -21,7 +21,7 @@ export class Movie {
 
     @Column({
         length: 500,
-        default: 'https://via.placeholder.com/150x400?text=:(',
+        default: 'https://via.placeholder.com/315x500?text=Obrazek znikł',
     })
     poster: string;
 }
