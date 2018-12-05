@@ -9,8 +9,6 @@ services:
       - ./backend:/project
       - ./shared:/shared
     working_dir: /project
-    tty: true
-    stdin_open: true
     command: bash -c "yarn && yarn start:dev"
   movies:
     image: node:10
@@ -18,15 +16,19 @@ services:
       - ./movies:/project
       - ./shared:/shared
     working_dir: /project
-    tty: true
-    stdin_open: true
     command: bash -c "yarn && yarn start:dev"
 #    deploy:
 #      replicas: 2
+  frontend:
+    image: node:10
+    ports:
+      - "80:3000"
+    volumes:
+      - ./frontend:/project
+    working_dir: /project
+    command: bash -c "yarn && yarn start"
   queue:
     image: rabbitmq:3
-    tty: true
-    stdin_open: true
   database:
     image: postgres:11
     volumes:
