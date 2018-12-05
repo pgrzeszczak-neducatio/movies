@@ -1,5 +1,5 @@
-import {Controller} from '@nestjs/common';
-import {MessagePattern} from '@nestjs/microservices';
+import {Controller, HttpStatus} from '@nestjs/common';
+import {MessagePattern, RpcException} from '@nestjs/microservices';
 import {MovieDto} from '@shared/dto/movie.dto';
 import {MovieService} from './services/movie.service';
 import {Movie} from './entities/movie.entity';
@@ -16,5 +16,17 @@ export class MovieController {
     @MessagePattern({cmd: 'movie_findAll'})
     async findAll(): Promise<Movie[]> {
         return this.movieService.findAll();
+    }
+
+    @MessagePattern({cmd: 'movie_find'})
+    async find(movieId: number): Promise<Movie> {
+        const movie = await this.movieService.find(movieId);
+        if (!movie) {
+            throw new RpcException({
+                message: 'Not found',
+                statusCode: HttpStatus.NOT_FOUND
+            });
+        }
+        return movie;
     }
 }

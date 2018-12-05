@@ -1,4 +1,4 @@
-import {Get, Controller, Post, Body} from '@nestjs/common';
+import {Get, Controller, Post, Body, Param, HttpException, HttpStatus} from '@nestjs/common';
 import {Client, ClientProxy, Transport} from '@nestjs/microservices';
 import {Observable} from 'rxjs';
 import {MovieDto} from '@shared/dto/movie.dto';
@@ -20,8 +20,19 @@ export class MovieController {
         return this.client.send<MovieDto[]>({cmd: 'movie_findAll'}, {});
     }
 
+    @Get(':id')
+    async get(@Param('id') id): Promise<MovieDto> {
+        let movie;
+        try {
+            movie = await this.client.send<MovieDto, number>({cmd: 'movie_find'}, id).toPromise();
+        } catch (e) {
+            throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+        }
+        return movie;
+    }
+
     @Post()
     create(@Body() movieData: MovieDto): Observable<MovieDto> {
-        return this.client.send<MovieDto>({cmd: 'movie_add'}, movieData);
+        return this.client.send<MovieDto, MovieDto>({cmd: 'movie_add'}, movieData);
     }
 }

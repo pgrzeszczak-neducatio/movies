@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import GridList from '@material-ui/core/GridList';
@@ -54,35 +58,46 @@ class MovieList extends Component {
 
   render() {
     return (
-      <div className={this.props.classes.root}>
-        <GridList cellHeight={500} cols={4} className={this.props.classes.gridList}>
-          {this.state.movies.map(movie => (
-            <GridListTile key={movie.id}>
-              <img src={movie.poster} alt={movie.title}/>
-              <GridListTileBar
-                title={movie.title}
-                subtitle={<span>{movie.year}</span>}
-                actionIcon={
-                  <IconButton className={this.props.classes.iconForward}>
-                    <ForwardIcon />
-                  </IconButton>
-                }
-              />
+      <Fragment>
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <Typography variant="h6" color="inherit">
+              Movies
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <div className={this.props.classes.root}>
+          <GridList cellHeight={500} cols={4} className={this.props.classes.gridList}>
+            {this.state.movies.map(movie => (
+              <GridListTile key={movie.id}>
+                <img src={movie.poster} alt={movie.title}/>
+                <GridListTileBar
+                  title={movie.title}
+                  subtitle={<span>{movie.year}</span>}
+                  actionIcon={
+                    <Link to={`/${movie.id}`}>
+                      <IconButton className={this.props.classes.iconForward}>
+                        <ForwardIcon />
+                      </IconButton>
+                    </Link>
+                  }
+                />
+              </GridListTile>
+            ))}
+            <GridListTile key="add_new">
+              <Grid className={this.props.classes.addGrid} container justify="center" alignItems="center">
+                <Paper className={this.props.classes.paper}>
+                  <Grid className={this.props.classes.addGrid} container justify="center" alignItems="center">
+                    <IconButton>
+                      <AddIcon className={this.props.classes.iconAdd} />
+                    </IconButton>
+                  </Grid>
+                </Paper>
+              </Grid>
             </GridListTile>
-          ))}
-          <GridListTile key="add_new">
-            <Grid className={this.props.classes.addGrid} container justify="center" alignItems="center">
-              <Paper className={this.props.classes.paper}>
-                <Grid className={this.props.classes.addGrid} container justify="center" alignItems="center">
-                  <IconButton>
-                    <AddIcon className={this.props.classes.iconAdd} />
-                  </IconButton>
-                </Grid>
-              </Paper>
-            </Grid>
-          </GridListTile>
-        </GridList>
-      </div>
+          </GridList>
+        </div>
+      </Fragment>
     );
   }
 }

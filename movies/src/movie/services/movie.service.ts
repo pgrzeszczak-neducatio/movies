@@ -15,6 +15,10 @@ export class MovieService {
         return this.movieRepository.find();
     }
 
+    find(id: number): Promise<Movie> {
+        return this.movieRepository.findOne({ id });
+    }
+
     add(movieData: MovieDto): Promise<Movie> {
         const movie = this.movieRepository.create(movieData);
         return this.movieRepository.save(movie);
