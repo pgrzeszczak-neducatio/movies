@@ -25,6 +25,6 @@ export class MovieService {
     }
 
     save(movie: Movie): Promise<Movie> {
-            return this.movieRepository.save(movie);
+        return this.movieRepository.save(movie);
     }
 }
