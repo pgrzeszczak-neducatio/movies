@@ -5,17 +5,45 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
-import ForwardIcon from '@material-ui/icons/Forward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import Grid from "@material-ui/core/Grid/Grid";
+import Rating from 'react-rating';
+import StarIcon from '@material-ui/icons/Star';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 const styles = theme => ({
-  root: {
+  grid: {
+    width: '100%',
+    height: 600,
+  },
+  card: {
+    display: 'flex',
+    height: 500,
+    width: '80%',
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  content: {
+    flex: '1 0 auto',
+  },
+  cover: {
+    minWidth: 315,
+  },
+  description: {
+    marginTop: 50,
+  },
+  rating: {
+    color: 'gold',
+    marginTop: 30,
+  },
+  ratingIcon: {
+    fontSize: 50,
   },
 });
 
@@ -50,9 +78,37 @@ class Movie extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        <div className={this.props.classes.root}>
-          {this.state.movie.title}
-        </div>
+        <Grid className={this.props.classes.grid} container justify="center" alignItems="center">
+          <Card className={this.props.classes.card}>
+            <CardMedia
+              className={this.props.classes.cover}
+              image={this.state.movie.poster}
+              title={this.state.movie.title}
+            />
+            <div className={this.props.classes.details}>
+              <CardContent className={this.props.classes.content}>
+                <Typography component="h3" variant="h3">
+                  {this.state.movie.title}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  {this.state.movie.year}, running time: {this.state.movie.length} min
+                </Typography>
+                <Typography variant="body" color="textSecondary" className={this.props.classes.description}>
+                  {this.state.movie.description}
+                </Typography>
+                <Rating
+                  className={this.props.classes.rating}
+                  stop={10}
+                  emptySymbol={<StarBorderIcon className={this.props.classes.ratingIcon} />}
+                  fullSymbol={<StarIcon className={this.props.classes.ratingIcon} />}
+                />
+                <Typography variant="body" color="textSecondary">
+                  {this.state.movie.rating}/10 ({this.state.movie.votes})
+                </Typography>
+              </CardContent>
+            </div>
+          </Card>
+        </Grid>
       </Fragment>
     );
   }

@@ -24,4 +24,16 @@ export class Movie {
         default: 'https://via.placeholder.com/315x500?text=Obrazek znikł',
     })
     poster: string;
+
+    @Column({
+        type: "float",
+        default: 0
+    })
+    rating: number;
+
+    @Column({
+        type: "int",
+        default: 0
+    })
+    votes: number;
 }
