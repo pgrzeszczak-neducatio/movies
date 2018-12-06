@@ -22,6 +22,7 @@
     "@nestjs/common": "^5.4.0",
     "@nestjs/core": "^5.4.0",
     "@nestjs/microservices": "^5.4.0",
+    "@nestjs/websockets": "^5.4.1",
     "amqp-connection-manager": "^2.3.0",
     "amqplib": "^0.5.2",
     "cors": "^2.8.5",

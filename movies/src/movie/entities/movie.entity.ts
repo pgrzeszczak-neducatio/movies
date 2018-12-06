@@ -1,6 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity({
+    orderBy: {
+        title: "ASC"
+    }
+})
 export class Movie {
     @PrimaryGeneratedColumn()
     id: number;
@@ -26,7 +30,7 @@ export class Movie {
     poster: string;
 
     @Column({
-        type: "float",
+        type: "double precision",
         default: 0
     })
     rating: number;

@@ -23,4 +23,8 @@ export class MovieService {
         const movie = this.movieRepository.create(movieData);
         return this.movieRepository.save(movie);
     }
+
+    save(movie: Movie): Promise<Movie> {
+            return this.movieRepository.save(movie);
+    }
 }
